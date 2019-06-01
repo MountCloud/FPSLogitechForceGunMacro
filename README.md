@@ -19,6 +19,8 @@ My machine translation may not be accurate.
 
 &nbsp;&nbsp;It's said that the import needs to be set as a permanent configuration file, otherwise it won't work. I haven't tested it. I've always been permanent anyway.
 
+&nbsp;&nbsp;Everyone's use habits are different, the effect of pressure gun may be different, so you can edit the parameters of macro to try to find the most suitable parameters.
+
 ## Major Function
 1:Open and close macros freely
 
@@ -52,6 +54,8 @@ G9 key = configuration reset key, used to restore to the default configuration, 
 &nbsp;&nbsp;宏默认为关闭状态，需要手动启动和关闭。
 
 &nbsp;&nbsp;说是导入时需要【设为永久性配置文件】，否则不生效，这个我没测试过，反正我一直都是永久的。
+
+&nbsp;&nbsp;每个人的使用习惯不同，可能压枪效果不一样，所以可以自己编辑宏里的参数进行尝试，找到最适合自己的参数。
 
 ## 主要功能
 1：可自由开启、关闭宏
