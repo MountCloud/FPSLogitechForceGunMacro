@@ -202,7 +202,7 @@ end
 --复位需要复位的配置
 function resetConfig()
 	log("reset config")
-	forceIndex = 1
+	forceIndex = 2
 	state = false
 	resetPointState = false
 end
