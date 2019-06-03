@@ -161,6 +161,8 @@ local resetConfigBtn = 9
 
 
 --FUNCTIONS----------------------------------------------------------------------------------
+--开启左键的事件报告
+EnablePrimaryMouseButtonEvents(true); 
 --总事件
 function OnEvent(event, arg)
 	--打印事件和参数
