@@ -37,9 +37,9 @@ local openBtn = 6
 local clickBtn = 1
 --压枪强度，这个是个数组，可以看成档位，值越大压枪力度就越大
 local force = {}
-force[1]= {["force"]=2,["threshold"]=130}
-force[2]= {["force"]=3,["threshold"]=180}
-force[3]= {["force"]=5,["threshold"]=230}
+force[1]= {["force"]=2,["threshold"]=130,["increment"]=0.2}
+force[2]= {["force"]=3,["threshold"]=180,["increment"]=0.3}
+force[3]= {["force"]=5,["threshold"]=200,["increment"]=3}
 --压枪默认强度档位使用第二个
 local forceIndex = 2
 --压枪档位向低调节,越低力度越小
@@ -48,7 +48,7 @@ local forceIndexDnBtn = 7
 local forceIndexOnBtn = 8
 
 --压枪间隔
-local sleepTime = 20
+local sleepTime = 50
 
 --记录已经压枪的值
 local runRorce = 0
@@ -124,8 +124,17 @@ function OnEvent(event, arg)
 end
 
 --返回需要执行的压枪力度
-function getForce()
-	return force[forceIndex].force
+function getForce(time)
+	local forceIncrement = force[forceIndex].increment
+	if(isNull(time) or isNull(forceIncrement)) then
+		return force[forceIndex].force
+	end
+	--增量方式
+	local incrementMul = time / 100
+	local nowIncrement = incrementMul * forceIncrement
+	local result = force[forceIndex].force + nowIncrement
+	log("result force is %s",result)
+	return result
 end
 
 --返回需要压枪的阈值
@@ -137,6 +146,7 @@ end
 function beginMove()
 	local x,y = getPoint()
 	
+	local runTimeStart = GetRunningTime()
 	--记录开始的坐标
 	startY = y
 	--此步骤就是鼠标按下执行，放下就跳出此块
@@ -146,8 +156,8 @@ function beginMove()
 			log("run="..runRorce)
 			--设置间隔
 			Sleep(sleepTime)
-
-			local tempForce = getForce()
+			local runTime = GetRunningTime() - runTimeStart
+			local tempForce = getForce(runTime)
 			--记录压枪的值
 			runRorce = runRorce+tempForce
 			--执行
@@ -202,7 +212,7 @@ end
 --复位需要复位的配置
 function resetConfig()
 	log("reset config")
-	forceIndex = 1
+	forceIndex = 2
 	state = false
 	resetPointState = false
 end
@@ -218,4 +228,12 @@ function log(str,...)
 	if(showLog) then
 		OutputLogMessage(scriptName.."-[INFO]-"..str.."\n", ...)	
 	end
+end
+
+--判断是否为空
+function isNull(arg)
+	if(arg == nil) then
+		return true
+	end
+	return false
 end
