@@ -107,7 +107,7 @@ function OnEvent(event, arg)
 	end
 
 	--开始压枪
-	if(event == "MOUSE_BUTTON_PRESSED" and arg == clickBtn and IsKeyLockOn(openLock) then
+	if(event == "MOUSE_BUTTON_PRESSED" and arg == clickBtn and IsKeyLockOn(openLock)) then
 		beginMove()
 	end
 	
