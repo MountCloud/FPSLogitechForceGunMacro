@@ -34,11 +34,11 @@ local showLog = true
 --开启键，我的鼠标有G键，G键是6
 local openBtn = 6
 --触发脚本的按键 左键是1
-local clickBtn = 1
 --压枪强度，这个是个数组，可以看成档位，值越大压枪力度就越大
+local clickBtn = 1
 local force = {}
-force[1]= {["force"]=2,["threshold"]=130,["increment"]=0.2}
-force[2]= {["force"]=3,["threshold"]=180,["increment"]=0.3}
+force[1]= {["force"]=2,["threshold"]=120,["increment"]=1.4}
+force[2]= {["force"]=4,["threshold"]=160,["increment"]=2.2}
 force[3]= {["force"]=5,["threshold"]=200,["increment"]=3}
 --压枪默认强度档位使用第二个
 local forceIndex = 2
@@ -87,6 +87,7 @@ function OnEvent(event, arg)
 			state = true
 			log("script open")
 		end
+		
 		return
 	end
 
@@ -99,6 +100,7 @@ function OnEvent(event, arg)
 			resetPointState = true
 			log("resetPoint open")
 		end
+		
 		return
 	end
 
@@ -121,6 +123,7 @@ function OnEvent(event, arg)
 	if(event == "MOUSE_BUTTON_PRESSED" and arg == clickBtn and state) then
 		beginMove()
 	end
+	
 end
 
 --返回需要执行的压枪力度
