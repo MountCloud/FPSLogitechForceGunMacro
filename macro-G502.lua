@@ -14,7 +14,7 @@
 --		1：最低档是根据冲锋枪调的
 
 --按钮介绍：
---		G键=开启、关闭压枪。
+--		大写锁定=锁定时开启压枪、关闭锁定时关闭压枪。
 --		DPI+=上调一个档位，档位越大，压枪力度越高
 --		DPI-=下降一个档位，档位越小，压枪力度越低
 --		前进键=开启鼠标复位，就是压枪之后鼠标自动恢复到压枪之前的位置
@@ -32,7 +32,7 @@ local showLog = true
 
 
 --开启键，我的鼠标有G键，G键是6
-local openBtn = 6
+local openLock = "capslock"
 --触发脚本的按键 左键是1
 --压枪强度，这个是个数组，可以看成档位，值越大压枪力度就越大
 local clickBtn = 1
@@ -78,19 +78,6 @@ function OnEvent(event, arg)
 	--打印事件和参数
 	log("event=%s,arg=%s", event, arg)
 
-	--控制开关压枪
-	if(event == "MOUSE_BUTTON_PRESSED" and arg == openBtn) then
-		if(state == true) then
-			state = false
-			log("script close")
-		else
-			state = true
-			log("script open")
-		end
-		
-		return
-	end
-
 	--判断是不是开关鼠标复位
 	if(event == "MOUSE_BUTTON_PRESSED" and arg == resetPointBtn) then
 		if(resetPointState == true) then
@@ -120,7 +107,7 @@ function OnEvent(event, arg)
 	end
 
 	--开始压枪
-	if(event == "MOUSE_BUTTON_PRESSED" and arg == clickBtn and state) then
+	if(event == "MOUSE_BUTTON_PRESSED" and arg == clickBtn and IsKeyLockOn(openLock) then
 		beginMove()
 	end
 	
